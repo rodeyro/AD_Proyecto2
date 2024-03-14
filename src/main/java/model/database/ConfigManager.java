@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 
 public class ConfigManager {
-    public static void guardardatos(String Host, String port, String database, String Username, String Password) {
+    public static void guardardatos(String Host, String port, String database, String Username, String Password, String path) {
         Config config = new Config(Host, port, database, Username, Password);
 
         String fileName = "config.bin";
@@ -33,7 +33,6 @@ public class ConfigManager {
     }
 
     public static Config CargarConfig() {
-        Connection connection = null;
         Path path = Paths.get("config.bin");
         Config config = null;
         if (path.toFile().exists()) {

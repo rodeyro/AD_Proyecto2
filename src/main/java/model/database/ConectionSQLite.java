@@ -5,7 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConectionSQLite {
-    public static void SQLite(Connection connection, String path){
+    public static Connection SQLite(String path){
+        Connection connection=null;
         try {
             String url = "jdbc:sqlite:" + path;
             connection = DriverManager.getConnection(url);
@@ -15,6 +16,7 @@ public class ConectionSQLite {
                 SQLException e) {
             e.printStackTrace();
         }
+        return connection;
     }
 
 }

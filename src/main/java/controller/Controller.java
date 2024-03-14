@@ -38,16 +38,27 @@ public class Controller {
         }
     }
 
-    public void saveMySQLConfiguration(String Host, String port, String database, String Username, String Password) {
+    public void saveMySQLConfiguration(String Host, String port, String database, String Username, String Password, String path) {
         Connection connectionsave = ConectionMYSQL.MySQLConnector(Host, port, Username, Password);
         if (connectionsave == null) {
             JOptionPane.showMessageDialog(null, "Error al conectarse a la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
         } else {
             connection = connectionsave;
             DataBase.BaseDatosMYSQL(connection, database);
-            ConfigManager.guardardatos(Host, port, database, Username, Password);
+            ConfigManager.guardardatos(Host, port, database, Username, Password, path);
         }
         TableCreationMYSQL.Table(connection, database);
+    }
+
+    public static void saveSQLiteConfiguration(String Host, String port, String database, String Username, String Password,String path) {
+        Connection connectionsave = ConectionSQLite.SQLite(path);
+        if (connectionsave == null) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse a la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            connection = connectionsave;
+            ConfigManager.guardardatos(Host, port, database, Username, Password,path);
+        }
+        TableCreationSQLite.Table(connection);
     }
 
     public static void FillBooks(String title, String autor) {

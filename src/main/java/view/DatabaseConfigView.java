@@ -107,15 +107,21 @@ public class DatabaseConfigView extends JFrame {
                 String password = passwordField.getText();
                 String dataBaseName = dbNameField.getText();
                 String port = portField.getText();
-                controller.saveMySQLConfiguration(host, port, dataBaseName, username, password);
+                String path = sqlitePathFile.describeConstable().get();
+                controller.saveMySQLConfiguration(host, port, dataBaseName, username, password,path);
                 if (base == false) {
                     new MainView(controller, connection).setVisible(true);
                 }
             }
 
             if (engine.equals("sqlite")) {
+                String host = hostField.getText();
+                String username = usernameField.getText();
+                String password = passwordField.getText();
+                String dataBaseName = dbNameField.getText();
+                String port = portField.getText();
                 String path = sqlitePathFile.describeConstable().get();
-               // ConectionSQLite.SQLite(connection,path);
+                Controller.saveSQLiteConfiguration(host, port, dataBaseName, username, password,path);
             }
 
             this.dispose();
