@@ -102,7 +102,7 @@ public class StartRentView extends JDialog {
 
         try {
             booksColumnNames = new String[] { "ID", "Título", "Autor/a" };
-            String[][] data = Controller.cargarDatosEnTablaLibrosDisponibles(new String[0][0]);
+            String[][] data = Controller.cargarDatosEnTablaLibrosD(new String[0][0]);
             booksTable = new JTable(data, booksColumnNames);
             booksTable.setDefaultEditor(Object.class, null);
         } catch (Exception e) {

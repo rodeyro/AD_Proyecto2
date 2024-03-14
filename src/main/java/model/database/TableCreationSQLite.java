@@ -13,7 +13,7 @@ public class TableCreationSQLite {
                             + "id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,"
                             + "titulo VARCHAR(100), "
                             + "autor VARCHAR(100),"
-                            + "prestado BOOLEAN DEFAULT FALSE"
+                            + "prestado INT DEFAULT 0"
                             + ")"
             );
             librosStatement.executeUpdate();

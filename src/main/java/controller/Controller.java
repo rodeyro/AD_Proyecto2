@@ -130,7 +130,7 @@ public class Controller {
         try {
             PreparedStatement use = connection.prepareStatement("USE " + config.getDatabase());
             use.executeUpdate();
-            String sql = "SELECT id,titulo,autor FROM libros WHERE prestado = TRUE";
+            String sql = "SELECT id,titulo,autor FROM libros WHERE prestado = 1";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             List<String[]> datas = new ArrayList<>();
@@ -162,7 +162,7 @@ public class Controller {
         try {
             PreparedStatement use = connection.prepareStatement("USE " + config.getDatabase());
             use.executeUpdate();
-            String sql = "SELECT id,titulo,autor FROM libros WHERE prestado = FALSE";
+            String sql = "SELECT id,titulo,autor FROM libros";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             List<String[]> datas = new ArrayList<>();
@@ -189,4 +189,37 @@ public class Controller {
         }
         return data;
     }
+
+    public static String[][] cargarDatosEnTablaLibrosD(String[][] strings) {
+        try {
+            PreparedStatement use = connection.prepareStatement("USE " + config.getDatabase());
+            use.executeUpdate();
+            String sql = "SELECT id,titulo,autor FROM libros";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            List<String[]> datas = new ArrayList<>();
+
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                String titulo = resultSet.getString("titulo");
+                String autor = resultSet.getString("autor");
+                String[] row = {id, titulo, autor};
+                datas.add(row);
+            }
+
+            resultSet.close();
+            statement.close();
+
+            String[][] dataArray = new String[datas.size()][3];
+            for (int i = 0; i < datas.size(); i++) {
+                dataArray[i] = datas.get(i);
+            }
+            strings = dataArray;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return strings;
+    }
+
 }
